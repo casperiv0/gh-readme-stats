@@ -98,7 +98,7 @@ ${createLanguageTextNode({
     colors: options.colors,
   });
 
-  card.setTitle("Stats since August 21, 2020");
+  card.setTitle("Wakatime Stats");
   card.setCSS(`
     ${cssStyles}
     .lang-name { font: 400 11px 'Segoe UI', Ubuntu, Sans-Serif; fill: ${options.colors.textColor} }
