@@ -5,6 +5,9 @@ import { clampValue } from "./utils";
 import { renderTopLanguages } from "./cards/topLangsCard";
 import { renderStatsCard } from "./cards/statsCard";
 import { fetchStats } from "./lib/fetchStats";
+import { renderWakatimeCard } from "./cards/wakatimeCard";
+import { fetchWakatimeStats } from "./lib/fetchWakatimeStats";
+import { getColors } from "./utils/getColors";
 
 const CACHE_SECONDS = {
   THIRTY_MINUTES: 1800,
@@ -29,16 +32,27 @@ server.get("/stats", async (req, reply) => {
   const query = (req.query as Record<string, any>) ?? {};
 
   const options = {
-    colors: {
-      titleColor: query.titleColor ? `#${query.titleColor}` : "#2f80ed",
-      iconColor: query.iconColor ? `#${query.iconColor}` : "#4c71f2",
-      textColor: query.textColor ? `#${query.textColor}` : "#333333",
-      bgColor: query.bgColor ? `#${query.bgColor}` : "#fffefe",
-      borderColor: query.borderColor && `#${query.borderColor}`,
-    },
+    colors: getColors(query),
   };
 
   return reply.send(renderStatsCard(stats, options));
+});
+
+server.get("/wakatime", async (req, reply) => {
+  const stats = await fetchWakatimeStats();
+
+  reply.header("Content-Type", "image/svg+xml");
+  reply.header("Cache-Control", `public, max-age=${cacheSeconds}`);
+
+  const query = (req.query as Record<string, any>) ?? {};
+
+  // todo: add util function
+  const options = {
+    count: parseInt(query.count) ?? 5,
+    colors: getColors(query),
+  };
+
+  return reply.send(renderWakatimeCard(stats, options));
 });
 
 server.get("/top-langs", async (req, reply) => {
@@ -51,13 +65,7 @@ server.get("/top-langs", async (req, reply) => {
 
   const options = {
     hide: query.hide?.split(",") ?? [],
-    colors: {
-      titleColor: query.titleColor ? `#${query.titleColor}` : "#2f80ed",
-      iconColor: query.iconColor ? `#${query.iconColor}` : "#4c71f2",
-      textColor: query.textColor ? `#${query.textColor}` : "#333333",
-      bgColor: query.bgColor ? `#${query.bgColor}` : "#fffefe",
-      borderColor: query.borderColor && `#${query.borderColor}`,
-    },
+    colors: getColors(query),
   };
 
   return reply.send(renderTopLanguages(topLangs, options));
