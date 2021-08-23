@@ -3,6 +3,8 @@ import "dotenv/config";
 import { fetchTopLanguages } from "./lib/fetchTopLanguages";
 import { clampValue } from "./utils";
 import { renderTopLanguages } from "./cards/topLangsCard";
+import { renderStatsCard } from "./cards/statsCard";
+import { fetchStats } from "./lib/fetchStats";
 
 const CACHE_SECONDS = {
   THIRTY_MINUTES: 1800,
@@ -11,16 +13,39 @@ const CACHE_SECONDS = {
   ONE_DAY: 86400,
 };
 
+const cacheSeconds = clampValue(
+  CACHE_SECONDS.TWO_HOURS,
+  CACHE_SECONDS.TWO_HOURS,
+  CACHE_SECONDS.ONE_DAY,
+);
+
 const server = fastify();
+
+server.get("/stats", async (req, reply) => {
+  const stats = await fetchStats();
+
+  console.log(stats);
+
+  reply.header("Content-Type", "image/svg+xml");
+  // reply.header("Cache-Control", `public, max-age=${cacheSeconds}`);
+
+  const query = (req.query as Record<string, any>) ?? {};
+
+  const options = {
+    colors: {
+      titleColor: query.titleColor ? `#${query.titleColor}` : "#2f80ed",
+      iconColor: query.iconColor ? `#${query.iconColor}` : "#4c71f2",
+      textColor: query.textColor ? `#${query.textColor}` : "#333333",
+      bgColor: query.bgColor ? `#${query.bgColor}` : "#fffefe",
+      borderColor: query.borderColor && `#${query.borderColor}`,
+    },
+  };
+
+  return reply.send(renderStatsCard(stats, options));
+});
 
 server.get("/top-langs", async (req, reply) => {
   const topLangs = await fetchTopLanguages();
-
-  const cacheSeconds = clampValue(
-    CACHE_SECONDS.TWO_HOURS,
-    CACHE_SECONDS.TWO_HOURS,
-    CACHE_SECONDS.ONE_DAY,
-  );
 
   reply.header("Content-Type", "image/svg+xml");
   reply.header("Cache-Control", `public, max-age=${cacheSeconds}`);
@@ -30,10 +55,11 @@ server.get("/top-langs", async (req, reply) => {
   const options = {
     hide: query.hide?.split(",") ?? [],
     colors: {
-      iconColor: "#4c71f2",
-      textColor: "#333",
-      bgColor: "#fffefe",
-      borderColor: "#e4e2e2",
+      iconColor: query.iconColor ?? "#4c71f2",
+      textColor: query.textColor ?? "#333",
+      bgColor: query.bgColor ?? "#fffefe",
+      borderColor: query.borderColor ?? "#e4e2e2",
+      titleColor: query.titleColor ?? "#2f80ed",
     },
   };
 

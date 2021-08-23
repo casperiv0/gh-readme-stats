@@ -1,4 +1,5 @@
-import { Card, Colors } from "../structures/Card";
+import { Card } from "../structures/Card";
+import { Colors } from "../types/Colors";
 import { EdgeNode } from "../types/TopLanguagesResponse";
 import { clampValue } from "../utils";
 

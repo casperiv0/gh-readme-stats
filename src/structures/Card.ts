@@ -1,3 +1,6 @@
+import { Colors } from "../types/Colors";
+import { flexLayout } from "../utils";
+
 interface CardData {
   width?: number;
   height?: number;
@@ -9,19 +12,13 @@ interface Padding {
   y: number;
 }
 
-export interface Colors {
-  bgColor: string;
-  borderColor: string;
-  iconColor: string;
-  textColor: string;
-}
-
 export class Card {
   width: number;
   height: number;
   css = "";
   colors: Colors = {} as Colors;
   borderRadius = 4.5;
+  title: string | null = null;
 
   padding: Padding = { x: 25, y: 35 };
 
@@ -34,6 +31,33 @@ export class Card {
 
   setCSS(v: string) {
     this.css = v;
+  }
+
+  setTitle(str: string) {
+    this.title = str;
+  }
+
+  renderTitle() {
+    const titleText = `
+    <text
+      x="0"
+      y="0"
+      class="header"
+      data-testid="header"
+    >${this.title}</text>
+  `;
+
+    return `
+    <g
+      data-testid="card-title"
+      transform="translate(${this.padding.x}, ${this.padding.y})"
+    >
+      ${flexLayout({
+        items: [titleText],
+        gap: 25,
+      }).join("")}
+    </g>
+  `;
   }
 
   render(body: string) {
@@ -62,12 +86,15 @@ export class Card {
           height="99%"
           stroke="${this.colors.borderColor}"
           width="${this.width - 1}"
-          fill="${typeof this.colors.bgColor === "object" ? "url(#gradient)" : this.colors.bgColor}"
-          stroke-opacity="0"
+          fill="${this.colors.bgColor}"
+          stroke-opacity="${this.colors?.borderColor ? 1 : 0}"
         />
+
+        ${!this.title ? "" : this.renderTitle()}
+
         <g
           data-testid="main-card-body"
-          transform="translate(0, ${this.padding.x})"
+          transform="translate(0, ${!this.title ? this.padding.x : this.padding.y + 20})"
         >
           ${body}
         </g>
