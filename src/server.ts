@@ -9,7 +9,6 @@ import { fetchStats } from "./lib/fetchStats";
 const CACHE_SECONDS = {
   THIRTY_MINUTES: 1800,
   TWO_HOURS: 7200,
-  FOUR_HOURS: 14400,
   ONE_DAY: 86400,
 };
 

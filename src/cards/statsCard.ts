@@ -78,7 +78,7 @@ export function renderStatsCard(stats: Stats, options: { colors: Colors }) {
   );
 
   const width = clampValue(50, 270, Infinity);
-  const height = Math.max(45 + (statItems.length + 1) * 25, 0);
+  const height = Math.max(5 + (statItems.length + 1) * 25, 0);
 
   const card = new Card({ width, height, colors: options.colors });
 
