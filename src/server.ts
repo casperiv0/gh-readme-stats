@@ -23,6 +23,13 @@ const cacheSeconds = clampValue(
 
 const server = fastify();
 
+server.get("/", async () => {
+  return {
+    routes: ["/stats", "/wakatime", "/top-langs"],
+    message: "Info cards are powered by anuraghazra/github-readme-stats on GitHub!",
+  };
+});
+
 server.get("/stats", async (req, reply) => {
   const stats = await fetchStats();
 
@@ -46,7 +53,6 @@ server.get("/wakatime", async (req, reply) => {
 
   const query = (req.query as Record<string, any>) ?? {};
 
-  // todo: add util function
   const options = {
     count: parseInt(query.count) ?? 5,
     colors: getColors(query),

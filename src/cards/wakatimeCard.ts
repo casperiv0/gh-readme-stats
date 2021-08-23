@@ -9,46 +9,6 @@ interface Options {
   count: number;
 }
 
-interface CreateLanguageOptions {
-  langs: WakatimeLanguage[];
-  x: number;
-  y: number;
-}
-
-function createCompactLangNode({
-  lang,
-  x,
-  y,
-}: Pick<CreateLanguageOptions, "x" | "y"> & { lang: WakatimeLanguage }) {
-  const color = languageColors[lang.name] || "#858585";
-
-  return `
-      <g transform="translate(${x}, ${y})">
-        <circle cx="5" cy="6" r="5" fill="${color}" />
-        <text data-testid="lang-name" x="15" y="10" class='lang-name'>
-          ${lang.name} - ${lang.text}
-        </text>
-      </g>
-    `;
-}
-
-function createLanguageTextNode({ langs, y }: Exclude<CreateLanguageOptions, "x">) {
-  return langs.map((lang, index) => {
-    if (index % 2 === 0) {
-      return createCompactLangNode({
-        lang,
-        x: 25,
-        y: 12.5 * index + y,
-      });
-    }
-    return createCompactLangNode({
-      lang,
-      x: 230,
-      y: 12.5 + 12.5 * index,
-    });
-  });
-}
-
 export function renderWakatimeCard({ languages }: WakatimeStats, options: Options) {
   const cssStyles = getStyles(options.colors);
 
@@ -109,4 +69,44 @@ ${createLanguageTextNode({
     ${layout}
   </svg>
 `);
+}
+
+interface CreateLanguageOptions {
+  langs: WakatimeLanguage[];
+  x: number;
+  y: number;
+}
+
+function createCompactLangNode({
+  lang,
+  x,
+  y,
+}: Pick<CreateLanguageOptions, "x" | "y"> & { lang: WakatimeLanguage }) {
+  const color = languageColors[lang.name] || "#858585";
+
+  return `
+      <g transform="translate(${x}, ${y})">
+        <circle cx="5" cy="6" r="5" fill="${color}" />
+        <text data-testid="lang-name" x="15" y="10" class='lang-name'>
+          ${lang.name} - ${lang.text}
+        </text>
+      </g>
+    `;
+}
+
+function createLanguageTextNode({ langs, y }: Exclude<CreateLanguageOptions, "x">) {
+  return langs.map((lang, index) => {
+    if (index % 2 === 0) {
+      return createCompactLangNode({
+        lang,
+        x: 25,
+        y: 12.5 * index + y,
+      });
+    }
+    return createCompactLangNode({
+      lang,
+      x: 230,
+      y: 12.5 + 12.5 * index,
+    });
+  });
 }
