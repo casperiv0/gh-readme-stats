@@ -24,10 +24,8 @@ const server = fastify();
 server.get("/stats", async (req, reply) => {
   const stats = await fetchStats();
 
-  console.log(stats);
-
   reply.header("Content-Type", "image/svg+xml");
-  // reply.header("Cache-Control", `public, max-age=${cacheSeconds}`);
+  reply.header("Cache-Control", `public, max-age=${cacheSeconds}`);
 
   const query = (req.query as Record<string, any>) ?? {};
 
@@ -55,11 +53,11 @@ server.get("/top-langs", async (req, reply) => {
   const options = {
     hide: query.hide?.split(",") ?? [],
     colors: {
-      iconColor: query.iconColor ?? "#4c71f2",
-      textColor: query.textColor ?? "#333",
-      bgColor: query.bgColor ?? "#fffefe",
-      borderColor: query.borderColor ?? "#e4e2e2",
-      titleColor: query.titleColor ?? "#2f80ed",
+      titleColor: query.titleColor ? `#${query.titleColor}` : "#2f80ed",
+      iconColor: query.iconColor ? `#${query.iconColor}` : "#4c71f2",
+      textColor: query.textColor ? `#${query.textColor}` : "#333333",
+      bgColor: query.bgColor ? `#${query.bgColor}` : "#fffefe",
+      borderColor: query.borderColor && `#${query.borderColor}`,
     },
   };
 
@@ -72,5 +70,5 @@ server.listen(8080, "0.0.0.0", (err, address) => {
     process.exit(1);
   }
 
-  console.log(`Server listening at ${address}`);
+  console.info(`Server listening at ${address}`);
 });

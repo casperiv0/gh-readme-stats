@@ -135,6 +135,8 @@ export function renderTopLanguages(
     } }`,
   );
 
+  card.setTitle("Most Used Languages");
+
   return card.render(`
   <svg data-testid="lang-items" x="${CARD_PADDING}">
     ${layout}

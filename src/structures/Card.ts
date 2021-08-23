@@ -73,6 +73,7 @@ export class Card {
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
             animation: fadeInAnimation 0.8s ease-in-out forwards;
+            fill: ${this.colors.titleColor};
           }
           ${this.css}
 
@@ -87,7 +88,7 @@ export class Card {
           stroke="${this.colors.borderColor}"
           width="${this.width - 1}"
           fill="${this.colors.bgColor}"
-          stroke-opacity="${this.colors?.borderColor ? 1 : 0}"
+          stroke-opacity="${this.colors.borderColor ? 1 : 0}"
         />
 
         ${!this.title ? "" : this.renderTitle()}
