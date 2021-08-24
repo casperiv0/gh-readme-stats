@@ -1,4 +1,4 @@
-import { Colors } from "../types/Colors";
+import { Colors } from "../types/Colors.js";
 
 export function getStyles({ textColor, iconColor }: Pick<Colors, "textColor" | "iconColor">) {
   return `

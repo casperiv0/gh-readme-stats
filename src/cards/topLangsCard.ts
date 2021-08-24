@@ -1,7 +1,7 @@
-import { Card } from "../structures/Card";
-import { Colors } from "../types/Colors";
-import { EdgeNode } from "../types/TopLanguagesResponse";
-import { clampValue } from "../utils";
+import { Card } from "../structures/Card.js";
+import { Colors } from "../types/Colors.js";
+import { EdgeNode } from "../types/TopLanguagesResponse.js";
+import { clampValue } from "../utils/index.js";
 
 const DEFAULT_CARD_WIDTH = 300;
 const DEFAULT_LANGS_COUNT = 7;
@@ -16,12 +16,12 @@ function createCompactLangNode({ lang, totalSize, x, y }: any) {
   const color = lang.color || "#858585";
 
   return `
-      <g transform="translate(${x}, ${y})">
-        <circle cx="5" cy="6" r="5" fill="${color}" />
-        <text data-testid="lang-name" x="15" y="10" class='lang-name'>
-          ${lang.name} ${percentage}%
-        </text>
-      </g>
+    <g transform="translate(${x}, ${y})">
+      <circle cx="5" cy="6" r="5" fill="${color}" />
+      <text data-testid="lang-name" x="15" y="10" class='lang-name'>
+        ${lang.name} ${percentage}%
+      </text>
+    </g>
     `;
 }
 
@@ -94,6 +94,7 @@ function renderCompactLayout(langs: EdgeNode[], width: number, totalLanguageSize
       <mask id="rect-mask">
         <rect x="0" y="0" width="${offsetWidth}" height="8" fill="white" rx="5" />
       </mask>
+
       ${compactProgressBar}
       ${createLanguageTextNode({
         x: 0,
@@ -138,8 +139,8 @@ export function renderTopLanguages(
   card.setTitle("Most Used Languages");
 
   return card.render(`
-  <svg data-testid="lang-items" x="${CARD_PADDING}">
-    ${layout}
-  </svg>
-`);
+    <svg data-testid="lang-items" x="${CARD_PADDING}">
+      ${layout}
+    </svg>
+  `);
 }

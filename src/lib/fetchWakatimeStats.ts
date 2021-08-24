@@ -1,6 +1,6 @@
 import "dotenv/config";
 import axios from "axios";
-import { WakatimeStats } from "../types/WakatimeStats";
+import { WakatimeStats } from "../types/WakatimeStats.js";
 
 export async function fetchWakatimeStats(): Promise<WakatimeStats> {
   const res = await axios({

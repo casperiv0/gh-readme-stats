@@ -1,13 +1,13 @@
 import fastify from "fastify";
 import "dotenv/config";
-import { fetchTopLanguages } from "./lib/fetchTopLanguages";
-import { clampValue } from "./utils";
-import { renderTopLanguages } from "./cards/topLangsCard";
-import { renderStatsCard } from "./cards/statsCard";
-import { fetchStats } from "./lib/fetchStats";
-import { renderWakatimeCard } from "./cards/wakatimeCard";
-import { fetchWakatimeStats } from "./lib/fetchWakatimeStats";
-import { getColors } from "./utils/getColors";
+import { fetchTopLanguages } from "./lib/fetchTopLanguages.js";
+import { clampValue } from "./utils/index.js";
+import { renderTopLanguages } from "./cards/topLangsCard.js";
+import { renderStatsCard } from "./cards/statsCard.js";
+import { fetchStats } from "./lib/fetchStats.js";
+import { renderWakatimeCard } from "./cards/wakatimeCard.js";
+import { fetchWakatimeStats } from "./lib/fetchWakatimeStats.js";
+import { getColors } from "./utils/getColors.js";
 
 const CACHE_SECONDS = {
   THIRTY_MINUTES: 1800,

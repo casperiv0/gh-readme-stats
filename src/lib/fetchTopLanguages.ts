@@ -1,6 +1,6 @@
 import "dotenv/config";
-import { request } from "../utils/request";
-import { Edge, EdgeNode, TopLanguagesResponse } from "../types/TopLanguagesResponse";
+import { request } from "../utils/request.js";
+import { Edge, EdgeNode, TopLanguagesResponse } from "../types/TopLanguagesResponse.js";
 
 const QUERY = `
   query userInfo($login: String!) {

@@ -1,9 +1,9 @@
-import { Card } from "../structures/Card";
-import { Colors } from "../types/Colors";
-import { Stats } from "../types/Stats";
-import { clampValue, flexLayout, formatNumber } from "../utils";
-import { getStyles } from "../utils/getStyles";
-import { icons } from "../utils/icons";
+import { Card } from "../structures/Card.js";
+import { Colors } from "../types/Colors.js";
+import { Stats } from "../types/Stats.js";
+import { clampValue, flexLayout, formatNumber } from "../utils/index.js";
+import { getStyles } from "../utils/getStyles.js";
+import { icons } from "../utils/icons.js";
 
 interface CreateNodeOptions {
   icon: string;

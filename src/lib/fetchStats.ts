@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 import "dotenv/config";
-import { Stats } from "../types/Stats";
-import { StatsResponse } from "../types/StatsResponse";
-import { request } from "../utils/request";
+import { Stats } from "../types/Stats.js";
+import { StatsResponse } from "../types/StatsResponse.js";
+import { request } from "../utils/request.js";
 
 const QUERY = `
   query userInfo($login: String!) {

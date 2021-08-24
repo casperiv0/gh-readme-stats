@@ -1,5 +1,5 @@
-import { Colors } from "../types/Colors";
-import { flexLayout } from "../utils";
+import { Colors } from "../types/Colors.js";
+import { flexLayout } from "../utils/index.js";
 
 interface CardData {
   width?: number;

@@ -2,9 +2,9 @@
   "name": "gh-readme-stats",
   "version": "1.0.0",
   "scripts": {
-    "dev": "nodemon ./src/server.ts",
-    "start": "node dist/server.js",
-    "build": "tsc --project tsconfig.json",
+    "dev": "node esbuild.mjs --watch",
+    "build": "rm -rf ./dist && node esbuild.mjs",
+    "start": "node dist/server.mjs",
     "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,yml}\" --ignore-path .gitignore",
     "lint": "eslint . --ext .ts,.tsx"
   },
@@ -17,9 +17,8 @@
   "devDependencies": {
     "@casper124578/eslint-config": "^0.0.16",
     "@types/node": "^16.7.1",
+    "esbuild": "^0.12.22",
     "eslint": "^7.32.0",
-    "nodemon": "^2.0.12",
-    "ts-node": "^10.2.1",
     "typescript": "^4.3.5"
   }
 }

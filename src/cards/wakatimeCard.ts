@@ -1,8 +1,8 @@
 import languageColors from "../data/languages.json";
-import { Card } from "../structures/Card";
-import { Colors } from "../types/Colors";
-import { WakatimeLanguage, WakatimeStats } from "../types/WakatimeStats";
-import { getStyles } from "../utils/getStyles";
+import { Card } from "../structures/Card.js";
+import { Colors } from "../types/Colors.js";
+import { WakatimeLanguage, WakatimeStats } from "../types/WakatimeStats.js";
+import { getStyles } from "../utils/getStyles.js";
 
 interface Options {
   colors: Colors;
@@ -41,15 +41,16 @@ export function renderWakatimeCard({ languages }: WakatimeStats, options: Option
     .join("");
 
   const layout = `
-<mask id="rect-mask">
-<rect x="25" y="0" width="${width - 50}" height="8" fill="white" rx="5" />
-</mask>
-${compactProgressBar}
-${createLanguageTextNode({
-  x: 0,
-  y: 25,
-  langs: languages.slice(0, options.count),
-}).join("")}
+    <mask id="rect-mask">
+      <rect x="25" y="0" width="${width - 50}" height="8" fill="white" rx="5" />
+    </mask>
+
+    ${compactProgressBar}
+    ${createLanguageTextNode({
+      x: 0,
+      y: 25,
+      langs: languages.slice(0, options.count),
+    }).join("")}
 `;
 
   const card = new Card({
@@ -65,9 +66,9 @@ ${createLanguageTextNode({
     `);
 
   return card.render(`
-  <svg x="0" y="0" width="100%">
-    ${layout}
-  </svg>
+    <svg x="0" y="0" width="100%">
+      ${layout}
+    </svg>
 `);
 }
 
@@ -85,12 +86,12 @@ function createCompactLangNode({
   const color = languageColors[lang.name] || "#858585";
 
   return `
-      <g transform="translate(${x}, ${y})">
-        <circle cx="5" cy="6" r="5" fill="${color}" />
-        <text data-testid="lang-name" x="15" y="10" class='lang-name'>
-          ${lang.name} - ${lang.text}
-        </text>
-      </g>
+    <g transform="translate(${x}, ${y})">
+      <circle cx="5" cy="6" r="5" fill="${color}" />
+      <text data-testid="lang-name" x="15" y="10" class='lang-name'>
+        ${lang.name} - ${lang.text}
+      </text>
+    </g>
     `;
 }
 
