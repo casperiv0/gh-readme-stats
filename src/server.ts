@@ -31,50 +31,65 @@ server.get("/", async () => {
 });
 
 server.get("/stats", async (req, reply) => {
-  const stats = await fetchStats();
+  try {
+    const stats = await fetchStats();
 
-  reply.header("Content-Type", "image/svg+xml");
-  reply.header("Cache-Control", `public, max-age=${cacheSeconds}`);
+    reply.header("Content-Type", "image/svg+xml");
+    reply.header("Cache-Control", `public, max-age=${cacheSeconds}`);
 
-  const query = (req.query as Record<string, any>) ?? {};
+    const query = (req.query as Record<string, any>) ?? {};
 
-  const options = {
-    colors: getColors(query),
-  };
+    const options = {
+      colors: getColors(query),
+    };
 
-  return reply.send(renderStatsCard(stats, options));
+    return reply.send(renderStatsCard(stats, options));
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown";
+    return reply.status(500).send({ error: message });
+  }
 });
 
 server.get("/wakatime", async (req, reply) => {
-  const stats = await fetchWakatimeStats();
+  try {
+    const stats = await fetchWakatimeStats();
 
-  reply.header("Content-Type", "image/svg+xml");
-  reply.header("Cache-Control", `public, max-age=${cacheSeconds}`);
+    reply.header("Content-Type", "image/svg+xml");
+    reply.header("Cache-Control", `public, max-age=${cacheSeconds}`);
 
-  const query = (req.query as Record<string, any>) ?? {};
+    const query = (req.query as Record<string, any>) ?? {};
 
-  const options = {
-    count: parseInt(query.count) ?? 5,
-    colors: getColors(query),
-  };
+    const options = {
+      count: parseInt(query.count) ?? 5,
+      colors: getColors(query),
+    };
 
-  return reply.send(renderWakatimeCard(stats, options));
+    return reply.send(renderWakatimeCard(stats, options));
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown";
+    return reply.status(500).send({ error: message });
+  }
 });
 
 server.get("/top-langs", async (req, reply) => {
-  const topLangs = await fetchTopLanguages();
+  try {
+    const topLangs = await fetchTopLanguages();
 
-  reply.header("Content-Type", "image/svg+xml");
-  reply.header("Cache-Control", `public, max-age=${cacheSeconds}`);
+    reply.header("Content-Type", "image/svg+xml");
+    reply.header("Cache-Control", `public, max-age=${cacheSeconds}`);
 
-  const query = (req.query as Record<string, any>) ?? {};
+    const query = (req.query as Record<string, any>) ?? {};
 
-  const options = {
-    hide: query.hide?.split(",") ?? [],
-    colors: getColors(query),
-  };
+    const options = {
+      hide: query.hide?.split(",") ?? [],
+      colors: getColors(query),
+    };
 
-  return reply.send(renderTopLanguages(topLangs, options));
+    return reply.send(renderTopLanguages(topLangs, options));
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown";
+    return reply.status(500).send({ error: message });
+  }
 });
 
 server.listen(8080, "0.0.0.0", (err, address) => {
