@@ -15,8 +15,8 @@
     "fastify": "^3.20.2"
   },
   "devDependencies": {
-    "@casper124578/eslint-config": "^0.0.16",
-    "@types/node": "^16.7.4",
+    "@casper124578/eslint-config": "^0.0.17",
+    "@types/node": "^16.7.10",
     "esbuild": "^0.12.24",
     "eslint": "^7.32.0",
     "typescript": "^4.4.2"
