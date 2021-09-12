@@ -4,6 +4,7 @@ import { flexLayout } from "../utils/index.js";
 interface CardData {
   width?: number;
   height?: number;
+  title?: string | null;
   colors: Colors;
 }
 
@@ -22,19 +23,16 @@ export class Card {
 
   padding: Padding = { x: 25, y: 35 };
 
-  constructor({ width = 100, height = 100, colors }: CardData) {
+  constructor({ width = 100, height = 100, colors, title }: CardData) {
     this.width = width;
     this.height = height;
 
+    this.title = title ?? null;
     this.colors = colors;
   }
 
-  setCSS(v: string) {
+  setCustomCSS(v: string) {
     this.css = v;
-  }
-
-  setTitle(str: string) {
-    this.title = str;
   }
 
   renderTitle() {

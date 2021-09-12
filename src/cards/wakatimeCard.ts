@@ -57,10 +57,10 @@ export function renderWakatimeCard({ languages }: WakatimeStats, options: Option
     width,
     height,
     colors: options.colors,
+    title: "Wakatime Stats",
   });
 
-  card.setTitle("Wakatime Stats");
-  card.setCSS(`
+  card.setCustomCSS(`
     ${cssStyles}
     .lang-name { font: 400 11px 'Segoe UI', Ubuntu, Sans-Serif; fill: ${options.colors.textColor} }
     `);

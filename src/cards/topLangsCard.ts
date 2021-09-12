@@ -128,15 +128,14 @@ export function renderTopLanguages(
     width,
     height,
     colors: options.colors ?? ({} as Colors),
+    title: "Most Used Languages",
   });
 
-  card.setCSS(
+  card.setCustomCSS(
     `.lang-name { font: 400 11px 'Segoe UI', Ubuntu, Sans-Serif; fill: ${
       options.colors?.textColor ?? "#858585"
     } }`,
   );
-
-  card.setTitle("Most Used Languages");
 
   return card.render(`
     <svg data-testid="lang-items" x="${CARD_PADDING}">

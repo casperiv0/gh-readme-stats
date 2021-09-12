@@ -84,7 +84,7 @@ export function renderStatsCard(stats: Stats, options: { colors: Colors }) {
 
   const styles = getStyles(options.colors);
 
-  card.setCSS(styles);
+  card.setCustomCSS(styles);
 
   return card.render(`
   <svg x="0" y="0">

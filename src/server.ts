@@ -25,8 +25,8 @@ const server = fastify();
 
 server.get("/", async () => {
   return {
-    routes: ["/stats", "/wakatime", "/top-langs"],
     message: "Info cards are powered by anuraghazra/github-readme-stats on GitHub!",
+    routes: ["/stats", "/wakatime", "/top-langs"],
   };
 });
 
@@ -92,11 +92,11 @@ server.get("/top-langs", async (req, reply) => {
   }
 });
 
-server.listen(8080, "0.0.0.0", (err, address) => {
+server.listen(8080, "0.0.0.0", (err) => {
   if (err) {
     console.error(err);
     process.exit(1);
   }
 
-  console.info(`Server listening at ${address}`);
+  console.info("Server listening at http://localhost:8080");
 });
