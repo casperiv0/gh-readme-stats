@@ -3,6 +3,7 @@ import "dotenv/config";
 import { Stats } from "../types/Stats.js";
 import { StatsResponse } from "../types/StatsResponse.js";
 import { request } from "../utils/request.js";
+import * as redis from "../lib/cache.js";
 
 const QUERY = `
   query userInfo($login: String!) {
@@ -55,6 +56,9 @@ async function fetchTotalCommits(): Promise<number> {
 }
 
 export async function fetchStats() {
+  const cached = await redis.get("stats");
+  if (cached) return cached as Stats;
+
   const res: AxiosResponse<StatsResponse> = await request(
     {
       query: QUERY,
@@ -81,5 +85,5 @@ export async function fetchStats() {
     return prev + curr.stargazers.totalCount;
   }, 0);
 
-  return stats;
+  return redis.set({ key: "stats", value: stats });
 }

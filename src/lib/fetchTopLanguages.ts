@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { request } from "../utils/request.js";
 import { Edge, EdgeNode, TopLanguagesResponse } from "../types/TopLanguagesResponse.js";
+import * as redis from "../lib/cache.js";
 
 const QUERY = `
   query userInfo($login: String!) {
@@ -25,6 +26,9 @@ const QUERY = `
 `;
 
 export async function fetchTopLanguages(hide: string[] = []): Promise<Record<string, EdgeNode>> {
+  const cached = await redis.get("top-langs");
+  if (cached) return cached;
+
   const res = await request(
     {
       query: QUERY,
@@ -71,5 +75,5 @@ export async function fetchTopLanguages(hide: string[] = []): Promise<Record<str
       return result;
     }, {} as Record<string, EdgeNode>);
 
-  return topLangs;
+  return redis.set({ key: "top-langs", value: topLangs });
 }
