@@ -10,5 +10,11 @@ export async function fetchWakatimeStats(): Promise<WakatimeStats> {
     url: `https://wakatime.com/api/v1/users/${process.env["WAKATIME_USERNAME"]}/stats?is_including_today=true`,
   });
 
-  return redis.set({ key: "wakatime", value: res.data.data });
+  const data: WakatimeStats = {
+    human_readable_range: res.data.data.human_readable_range,
+    languages: res.data.data.languages,
+    total_seconds_including_other_language: res.data.data.total_seconds_including_other_language,
+  };
+
+  return redis.set({ key: "wakatime", value: data });
 }

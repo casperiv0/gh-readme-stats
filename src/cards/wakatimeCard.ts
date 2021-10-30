@@ -9,7 +9,10 @@ interface Options {
   count: number;
 }
 
-export function renderWakatimeCard({ languages }: WakatimeStats, options: Options) {
+export function renderWakatimeCard(
+  { languages, human_readable_range }: WakatimeStats,
+  options: Options,
+) {
   const cssStyles = getStyles(options.colors);
 
   const width = 490;
@@ -19,7 +22,6 @@ export function renderWakatimeCard({ languages }: WakatimeStats, options: Option
   const compactProgressBar = languages
     .slice(0, options.count)
     .map((language) => {
-      // const progress = (width * lang.percent) / 100;
       const progress = ((width - 25) * language.percent) / 100;
 
       const languageColor = languageColors[language.name] || "#858585";
@@ -57,7 +59,7 @@ export function renderWakatimeCard({ languages }: WakatimeStats, options: Option
     width,
     height,
     colors: options.colors,
-    title: "Wakatime Stats",
+    title: `Wakatime Stats (${human_readable_range})`,
   });
 
   card.setCustomCSS(`

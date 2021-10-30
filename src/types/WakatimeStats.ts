@@ -1,6 +1,7 @@
 export interface WakatimeStats {
   languages: WakatimeLanguage[];
   total_seconds_including_other_language: number;
+  human_readable_range: string;
 }
 
 export interface WakatimeLanguage {

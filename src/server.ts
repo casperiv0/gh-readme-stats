@@ -60,7 +60,7 @@ server.get("/wakatime", async (req, reply) => {
     const query = (req.query as Record<string, any>) ?? {};
 
     const options = {
-      count: parseInt(query.count) ?? 5,
+      count: query.count ? parseInt(query.count) : 5,
       colors: getColors(query),
     };
 
