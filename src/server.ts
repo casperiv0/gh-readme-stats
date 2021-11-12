@@ -26,7 +26,7 @@ const server = fastify();
 server.get("/", async () => {
   return {
     message: "Info cards are powered by anuraghazra/github-readme-stats on GitHub!",
-    routes: ["/stats", "/wakatime", "/top-langs"],
+    routes: ["/stats", "/wakatime", "/top-langs", "/raw/:type"],
   };
 });
 
@@ -86,6 +86,24 @@ server.get("/top-langs", async (req, reply) => {
     };
 
     return reply.send(renderTopLanguages(topLangs, options));
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown";
+    return reply.status(500).send({ error: message });
+  }
+});
+
+server.get("/raw/:type", async (req, reply) => {
+  try {
+    const data = {
+      stats: await fetchStats(),
+      "top-langs": await fetchTopLanguages(),
+      wakatime: await fetchWakatimeStats(),
+    };
+
+    reply.header("Content-Type", "application/json");
+    reply.header("Cache-Control", `public, max-age=${cacheSeconds}`);
+
+    return reply.send(data[(req.params as any).type]);
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown";
     return reply.status(500).send({ error: message });
