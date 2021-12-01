@@ -17,7 +17,7 @@
     "ioredis": "^4.28.0"
   },
   "devDependencies": {
-    "@casper124578/eslint-config": "^1.0.0",
+    "@casper124578/eslint-config": "^2.1.0",
     "@types/ioredis": "^4.27.8",
     "@types/node": "^16.11.6",
     "esbuild": "^0.13.12",
