@@ -20,7 +20,7 @@
     "@casper124578/eslint-config": "^2.1.0",
     "@types/ioredis": "^4.28.1",
     "@types/node": "^16.11.11",
-    "@typescript-eslint/eslint-plugin": "^5.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
     "esbuild": "^0.14.1",
     "eslint-plugin-promise": "^5.2.0",
     "typescript": "^4.5.2"
