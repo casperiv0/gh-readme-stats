@@ -14,7 +14,7 @@
     "dotenv": "^15.0.0",
     "eslint": "^8.8.0",
     "fastify": "^3.27.0",
-    "ioredis": "^4.28.3"
+    "ioredis": "^4.28.5"
   },
   "devDependencies": {
     "@casper124578/eslint-config": "^2.3.2",
