@@ -14,6 +14,7 @@ async function make() {
     format: "esm",
     bundle: true,
     platform: "node",
+    target: "node16",
     external: Object.keys(pkg.dependencies),
     watch,
     logLevel: "info",
