@@ -10,19 +10,19 @@
     "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
-    "axios": "^0.26.1",
-    "dotenv": "^16.0.0",
-    "eslint": "^8.12.0",
-    "fastify": "^3.27.4",
-    "ioredis": "^5.0.3"
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "eslint": "^8.17.0",
+    "fastify": "^4.0.1",
+    "ioredis": "^5.0.6"
   },
   "devDependencies": {
-    "@casper124578/eslint-config": "^4.2.0",
+    "@casper124578/eslint-config": "^4.4.0",
     "@types/ioredis": "^4.28.10",
-    "@types/node": "^17.0.23",
-    "@typescript-eslint/eslint-plugin": "^5.17.0",
-    "esbuild": "^0.14.30",
+    "@types/node": "^17.0.42",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "esbuild": "^0.14.43",
     "eslint-plugin-promise": "^6.0.0",
-    "typescript": "^4.6.3"
+    "typescript": "^4.7.3"
   }
 }
