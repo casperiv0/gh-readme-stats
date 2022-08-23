@@ -15,7 +15,6 @@ interface CreateNodeOptions {
 function createTextNode({ icon, label, value, id }: CreateNodeOptions) {
   const kValue = formatNumber(value);
 
-  // eslint-disable-next-line quotes
   const iconSvg = `
       <svg data-testid="icon" class="icon" viewBox="0 0 16 16" version="1.1" width="16" height="16">
         ${icon}

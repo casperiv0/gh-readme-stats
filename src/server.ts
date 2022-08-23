@@ -37,7 +37,7 @@ server.get("/stats", async (req, reply) => {
     reply.header("Content-Type", "image/svg+xml");
     reply.header("Cache-Control", `public, max-age=${cacheSeconds}`);
 
-    const query = (req.query as Record<string, any>) ?? {};
+    const query = (req.query as Record<string, any> | undefined) ?? {};
 
     const options = {
       colors: getColors(query),
@@ -57,7 +57,7 @@ server.get("/wakatime", async (req, reply) => {
     reply.header("Content-Type", "image/svg+xml");
     reply.header("Cache-Control", `public, max-age=${cacheSeconds}`);
 
-    const query = (req.query as Record<string, any>) ?? {};
+    const query = (req.query as Record<string, any> | undefined) ?? {};
 
     const options = {
       count: query.count ? parseInt(query.count) : 5,
@@ -78,7 +78,7 @@ server.get("/top-langs", async (req, reply) => {
     reply.header("Content-Type", "image/svg+xml");
     reply.header("Cache-Control", `public, max-age=${cacheSeconds}`);
 
-    const query = (req.query as Record<string, any>) ?? {};
+    const query = (req.query as Record<string, any> | undefined) ?? {};
 
     const options = {
       hide: query.hide?.split(",") ?? [],
