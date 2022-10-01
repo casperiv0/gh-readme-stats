@@ -19,7 +19,7 @@
   "devDependencies": {
     "@casper124578/eslint-config": "^5.0.1",
     "@types/ioredis": "^4.28.10",
-    "@types/node": "^18.7.14",
+    "@types/node": "^18.7.23",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "esbuild": "^0.15.6",
     "eslint-plugin-promise": "^6.0.1",
