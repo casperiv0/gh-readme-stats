@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@casper124578/eslint-config": "^5.0.1",
-    "@types/ioredis": "^4.28.10",
+    "@types/ioredis": "^5.0.0",
     "@types/node": "^18.11.10",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "esbuild": "^0.15.16",
